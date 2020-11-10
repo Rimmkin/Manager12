@@ -17,4 +17,9 @@ public class Smartphone extends Product {
     public void setProducer(String producer) {
         this.producer = producer;
     }
+
+    @Override
+    public boolean matches(String search) {
+        return super.matches(search) || search.equals(this.producer);
+    }
 }

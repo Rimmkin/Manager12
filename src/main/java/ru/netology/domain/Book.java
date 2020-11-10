@@ -1,5 +1,7 @@
 package ru.netology.domain;
 
+import java.util.Objects;
+
 public class Book extends Product {
     private String author;
 
@@ -17,5 +19,10 @@ public class Book extends Product {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean matches(String search) {
+        return super.matches(search) || search.equals(this.author);
     }
 }

@@ -1,11 +1,20 @@
 package ru.netology.domain;
 
+import ru.netology.repository.ProductRepository;
+
+import java.util.Objects;
+
 public class Product {
     private int id;
     private String name;
     private int price;
 
 
+    private ProductRepository repository;
+
+    public Product(ProductRepository repository) {
+        this.repository = repository;
+    }
     public Product() {
     }
 
@@ -34,5 +43,25 @@ public class Product {
     }
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id &&
+                price == product.price &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(repository, product.repository);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, repository);
+    }
+
+    public boolean matches(String search) {
+        return search.equals(this.name);
     }
 }
